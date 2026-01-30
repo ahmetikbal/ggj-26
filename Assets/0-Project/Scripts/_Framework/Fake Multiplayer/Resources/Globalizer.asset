@@ -1,0 +1,96 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1493a847df03e64d994626d01e55c74, type: 3}
+  m_Name: Globalizer
+  m_EditorClassIdentifier: 
+  continents:
+  - isActive: 1
+    continentName: North America
+    countries:
+    - isActive: 1
+      countryName: America
+      flag: {fileID: 7113066567066023071, guid: 5b9f64be4aa06430bb4d9c212bcd45b4, type: 3}
+      names:
+      - Isabella
+      - William
+      - Emma
+      - Noah
+    - isActive: 1
+      countryName: Canada
+      flag: {fileID: -4537281551234122163, guid: 5b9f64be4aa06430bb4d9c212bcd45b4, type: 3}
+      names:
+      - Sophia
+      - Jackson
+      - Aria
+      - Lucas
+    - isActive: 1
+      countryName: "Gr\xF6nland"
+      flag: {fileID: -2461266657867508610, guid: 5b9f64be4aa06430bb4d9c212bcd45b4, type: 3}
+      names:
+      - Julie
+      - Peter
+      - Isabella
+      - Hans
+    - isActive: 1
+      countryName: Cuba
+      flag: {fileID: -5787372395338588466, guid: 5b9f64be4aa06430bb4d9c212bcd45b4, type: 3}
+      names:
+      - Benita
+      - Elian
+      - Isabel
+      - Cordaro
+  - isActive: 0
+    continentName: South America
+    countries:
+    - isActive: 1
+      countryName: Brazil
+      flag: {fileID: -1315667688901330527, guid: 5b9f64be4aa06430bb4d9c212bcd45b4, type: 3}
+      names:
+      - Maria
+      - Paulo
+      - Adriana
+      - Jose
+    - isActive: 1
+      countryName: Argentina
+      flag: {fileID: -7509867479797069844, guid: 5b9f64be4aa06430bb4d9c212bcd45b4, type: 3}
+      names:
+      - Camila
+      - Carlos
+      - Sara
+      - Victor
+  - isActive: 1
+    continentName: Europe
+    countries:
+    - isActive: 1
+      countryName: Germany
+      flag: {fileID: -1852849400971184579, guid: 5b9f64be4aa06430bb4d9c212bcd45b4, type: 3}
+      names:
+      - Marie
+      - Paul
+      - Sophie
+      - Elias
+    - isActive: 1
+      countryName: France
+      flag: {fileID: 1008213583763693149, guid: 5b9f64be4aa06430bb4d9c212bcd45b4, type: 3}
+      names:
+      - Nathan
+      - Lucas
+      - Enzo
+      - Louis
+    - isActive: 1
+      countryName: Italy
+      flag: {fileID: -7160546658234042207, guid: 5b9f64be4aa06430bb4d9c212bcd45b4, type: 3}
+      names:
+      - Antonio
+      - Maria
+      - Mario
+      - Rosa
