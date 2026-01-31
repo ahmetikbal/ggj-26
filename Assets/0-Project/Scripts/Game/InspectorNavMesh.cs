@@ -5,8 +5,23 @@ using UnityEngine.AI;
 
 public class InspectorNavMesh : MonoBehaviour
 {
+    public static InspectorNavMesh Instance { get; private set; }
+
+    
     public NavMeshAgent navMeshAgent;
     public Transform navMeshDestination;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     void Start()
     {
@@ -17,7 +32,7 @@ public class InspectorNavMesh : MonoBehaviour
      // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && GameManager.Instance.gameState == GameManager.GameState.Free)
         {
             navMeshAgent.ResetPath();
             MoveToMousePosition();
