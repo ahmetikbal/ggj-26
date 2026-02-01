@@ -53,11 +53,16 @@ public class InspectorNavMesh : MonoBehaviour
 
         if(targetPos.x > transform.position.x)
         {
-            transform.localScale = new Vector3(10.9094f, 10.9094f, 10.9094f);
+            SetXScale(10.9094f);
         }
         else if(targetPos.x < transform.position.x)
         {
-            transform.localScale = new Vector3(-10.9094f, 10.9094f, 10.9094f);
+            SetXScale(-10.9094f);
         }
+    }
+
+    public void SetXScale(float targetPosX)
+    {
+        transform.localScale = new Vector3(targetPosX, transform.localScale.y, transform.localScale.z);
     }
 }

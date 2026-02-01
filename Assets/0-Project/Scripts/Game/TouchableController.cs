@@ -9,7 +9,7 @@ public class TouchableController : MonoBehaviour
     public List<TouchableObjects> touchables;
     
     // Şu an hedeflenen touchable (diyalog için)
-    private TouchableObjects currentTarget;
+    public TouchableObjects currentTarget;
 
     private void Awake()
     {
@@ -80,6 +80,16 @@ public class TouchableController : MonoBehaviour
         if (currentTarget != null && currentTarget.dialoguePanel != null)
         {
             currentTarget.StartDialogue();
+
+            if(currentTarget.transform.position.x < currentTarget.targetTransform.position.x)
+            {
+                InspectorNavMesh.Instance.SetXScale(-10.9094f);
+            }
+            else
+            {
+                InspectorNavMesh.Instance.SetXScale(10.9094f);
+            }
+
             currentTarget = null;
         }
     }
