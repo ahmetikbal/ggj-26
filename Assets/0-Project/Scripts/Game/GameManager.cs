@@ -117,11 +117,24 @@ public class GameManager : MonoBehaviour
 
 
     public GameObject questionPanel, wrongAnswerPanel, trueAnswerPanel;
+    public GameObject outroVideo; // Inspector'dan atanacak
+    
     public void OnClick_WrongAnswer()
     {
         questionPanel.SetActive(false);
         wrongAnswerPanel.SetActive(true);
         trueAnswerPanel.SetActive(false);
+        
+        // 5 saniye sonra outro videosunu oynat
+        if (outroVideo != null)
+        {
+            DOVirtual.DelayedCall(5f, () => 
+            {
+                wrongAnswerPanel.SetActive(false); // Paneli kapat (opsiyonel ama daha temiz)
+                mainSceneGameObject.SetActive(false);
+                outroVideo.SetActive(true);
+            });
+        }
     }
 
     public void OnClick_TrueAnswer()
@@ -129,5 +142,20 @@ public class GameManager : MonoBehaviour
         questionPanel.SetActive(false);
         wrongAnswerPanel.SetActive(false);
         trueAnswerPanel.SetActive(true);
+        
+        // 5 saniye sonra outro videosunu oynat
+        if (outroVideo != null)
+        {
+            DOVirtual.DelayedCall(5f, () => 
+            {
+                trueAnswerPanel.SetActive(false); // Paneli kapat (opsiyonel ama daha temiz)
+                mainSceneGameObject.SetActive(false);
+                outroVideo.SetActive(true);
+            });
+        }
+    }
+
+    public void OnClick_Temizle(){
+        TepsiGameManager.Instance.SetAllTablesTrue();
     }
 }

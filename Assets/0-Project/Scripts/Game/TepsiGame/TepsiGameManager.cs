@@ -26,6 +26,14 @@ public class TepsiGameManager : MonoBehaviour
     {
         ResetGame();
     }
+
+    public void SetAllTablesTrue()
+    {
+        table1Completed = true;
+        table2Completed = true;
+        table3Completed = true;
+        table4Completed = true;
+    }
     
     public void ResetGame()
     {
