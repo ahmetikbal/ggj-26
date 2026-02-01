@@ -1640,6 +1640,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1484557177}
   m_SourcePrefab: {fileID: 100100000, guid: 277e1aac99d1d46b5a40ef37dcb6dd2f, type: 3}
+--- !u!114 &271336260 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 600835985521670127, guid: f8ef8f6576cb74fbab8947a8690090ef, type: 3}
+  m_PrefabInstance: {fileID: 7649167499188254408}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a51ebdcbde1a4ff49c68e2c2d8e9dda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &278085233
 GameObject:
   m_ObjectHideFlags: 0
@@ -1771,12 +1782,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   garsonPanel: {fileID: 952054264}
-  asciPanel: {fileID: 0}
-  besteciPanel: {fileID: 0}
-  simyaciPanel: {fileID: 0}
+  asciPanel: {fileID: 391518734}
+  besteciPanel: {fileID: 2025673215}
+  simyaciPanel: {fileID: 271336260}
   aycaPanel: {fileID: 1468597835}
   tuccarPanel: {fileID: 2127058863}
-  beatricePanel: {fileID: 0}
+  beatricePanel: {fileID: 527911771}
   fruitNinjaCanvas: {fileID: 586249735}
   tableCleanCanvas: {fileID: 1476813825}
   finalDecisionPanel: {fileID: 0}
@@ -2169,6 +2180,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &391518734 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7626474472882429458, guid: 015803016476a4f7f90ec9b02bc1292b, type: 3}
+  m_PrefabInstance: {fileID: 1068878391}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a51ebdcbde1a4ff49c68e2c2d8e9dda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &393325257
 GameObject:
   m_ObjectHideFlags: 0
@@ -3403,6 +3425,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3257223810906259677, guid: e3d966eac96064cfb989083e0da05405, type: 3}
   m_PrefabInstance: {fileID: 527674189}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &527911771 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4945738877031710089, guid: 0fb74844d94f042d6a929cc285310ae3, type: 3}
+  m_PrefabInstance: {fileID: 7530320260559665289}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a51ebdcbde1a4ff49c68e2c2d8e9dda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &535769240
 GameObject:
   m_ObjectHideFlags: 0
@@ -6008,7 +6041,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameDuration: 60
-  targetScore: 30
+  targetScore: 5
   bombPenalty: 10
   fruitSpawner: {fileID: 940698011}
   sliceController: {fileID: 2039894734}
@@ -8101,6 +8134,10 @@ MonoBehaviour:
   lastTargetTransformForInspector: {fileID: 0}
   nextCameraPosition: {x: 0, y: 0, z: 0}
   nextOrtographicSize: 0
+  mainSceneGameObject: {fileID: 511387422}
+  asciSceneGameObject: {fileID: 852532363}
+  fruitNinjaGameObject: {fileID: 586249735}
+  tableGameGameObject: {fileID: 1476813825}
 --- !u!1 &1830695704
 GameObject:
   m_ObjectHideFlags: 0
@@ -9945,6 +9982,17 @@ Material:
     - _ShadowColor: {r: 0, g: 0, b: 0, a: 1}
     - _ShineColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
+--- !u!114 &2025673215 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6452935219642112176, guid: ee0fddb6b31234cea9cc88ce2c8f2f41, type: 3}
+  m_PrefabInstance: {fileID: 4057859687455615505}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a51ebdcbde1a4ff49c68e2c2d8e9dda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2029115604
 GameObject:
   m_ObjectHideFlags: 0
