@@ -1,5 +1,6 @@
 using UnityEngine;
 using DG.Tweening;
+using Sirenix.OdinInspector;
 
 public class SliceableObject : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class SliceableObject : MonoBehaviour
         Bomb
     }
     
-    [SerializeField] private ObjectType objectType = ObjectType.Fruit;
+    [SerializeField] [EnumToggleButtons] private ObjectType objectType = ObjectType.Fruit;
     [SerializeField] private GameObject sliceEffectPrefab;
     [SerializeField] private float slicedPieceLifetime = 2f;
     

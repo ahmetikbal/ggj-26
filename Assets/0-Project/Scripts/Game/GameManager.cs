@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using Sirenix.OdinInspector;
 
 public class GameManager : MonoBehaviour
 {
@@ -24,15 +25,18 @@ public class GameManager : MonoBehaviour
         Free,
         MoveToTarget,
         Talk,
-        MiniGame
+        MiniGame,
+        Cutscene
     }
 
-    public GameState gameState;
+    [EnumToggleButtons] public GameState gameState;
 
     public Animator inspectorAnimator;
     public Transform lastTargetTransformForInspector;
     [HideInInspector] public Vector3 nextCameraPosition;
     [HideInInspector] public float nextOrtographicSize;
+    
+    private bool dialogueTriggered = false;
 
     void Start()
     {
@@ -46,22 +50,49 @@ public class GameManager : MonoBehaviour
         {
             case GameState.Free:
                 inspectorAnimator.speed = 1;
+                dialogueTriggered = false;
                 break;
+                
             case GameState.MoveToTarget:
                 inspectorAnimator.speed = 1;
-                if(InspectorNavMesh.Instance.navMeshAgent.remainingDistance <= 0.1f)
+                if(InspectorNavMesh.Instance.navMeshAgent.remainingDistance <= 0.01f)
                 {
                     Camera.main.transform.DOMove(nextCameraPosition, 1f).SetEase(Ease.Linear);
                     DOVirtual.Float(Camera.main.orthographicSize, nextOrtographicSize, 1f, (value) => Camera.main.orthographicSize = value).SetEase(Ease.InOutQuad);
                     gameState = GameState.Talk;
+                    dialogueTriggered = false;
                 }
                 break;
+                
             case GameState.Talk:
-            inspectorAnimator.speed = 0;
-            
+                inspectorAnimator.speed = 0;
+                
+                // Diyaloğu bir kez tetikle
+                if (!dialogueTriggered)
+                {
+                    dialogueTriggered = true;
+                    TouchableController.Instance?.OnInspectorReachedTarget();
+                }
                 break;
+                
             case GameState.MiniGame:
+                inspectorAnimator.speed = 0;
                 break;
+                
+            case GameState.Cutscene:
+                inspectorAnimator.speed = 0;
+                break;
+        }
+    }
+    
+    /// <summary>
+    /// Diyalog bittiğinde çağrılır
+    /// </summary>
+    public void OnDialogueEnded()
+    {
+        if (gameState == GameState.Talk)
+        {
+            gameState = GameState.Free;
         }
     }
 }
