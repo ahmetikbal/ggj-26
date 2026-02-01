@@ -139,5 +139,10 @@ public class FruitNinjaUI : MonoBehaviour
         // Example: Load previous scene or destroy mini-game canvas
         // SceneManager.LoadScene("MainGame");
         // Or: Destroy(gameObject);
+
+        DialogueActionHandler.Instance.OnMinigameComplete();
+        GameManager.Instance.fruitNinjaGameObject.SetActive(false);
+        GameManager.Instance.asciSceneGameObject.SetActive(false);
+        GameManager.Instance.mainSceneGameObject.SetActive(true);
     }
 }

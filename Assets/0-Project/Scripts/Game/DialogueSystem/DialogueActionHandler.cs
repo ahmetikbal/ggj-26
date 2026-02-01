@@ -121,6 +121,10 @@ public class DialogueActionHandler : MonoBehaviour
         {
             fruitNinjaCanvas.SetActive(true);
         }
+
+        GameManager.Instance.fruitNinjaGameObject.SetActive(true);
+        GameManager.Instance.asciSceneGameObject.SetActive(false);
+        GameManager.Instance.mainSceneGameObject.SetActive(false);
         
         // FruitNinjaManager'a callback register et
         // FruitNinjaManager.Instance.OnGameComplete += OnMinigameComplete;

@@ -21,10 +21,7 @@ public class TouchableController : MonoBehaviour
         {
             Destroy(gameObject);
         }
-    }
 
-    void Start()
-    {
         touchables = new List<TouchableObjects>();
         touchables.AddRange(FindObjectsOfType<TouchableObjects>());
         touchables.ForEach(t => t.transform.GetChild(0).GetComponent<Renderer>().material.DisableKeyword("OUTBASE_ON"));

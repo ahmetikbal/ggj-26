@@ -44,9 +44,16 @@ public class GameManager : MonoBehaviour
     
     private bool dialogueTriggered = false;
 
+    public GameObject mainSceneGameObject, asciSceneGameObject, fruitNinjaGameObject, tableGameGameObject;
+
     void Start()
     {
         gameState = GameState.Free;
+
+        mainSceneGameObject.SetActive(false);
+        asciSceneGameObject.SetActive(true);
+        fruitNinjaGameObject.SetActive(false);
+        tableGameGameObject.SetActive(false);
     }
 
     // Update is called once per frame
