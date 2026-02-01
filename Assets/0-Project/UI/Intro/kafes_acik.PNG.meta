@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 5ca0ae90da5674f53886ff8e91cb1218
+guid: c7604681abeba5941a421e4fb080b327
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -93,42 +93,16 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: iPhone
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Untitled_Artwork-2 9_0
+      name: kafes_acik_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 746
         y: 0
-        width: 2560
+        width: 911
         height: 1440
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -137,8 +111,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 119dbc92f7d7e0d4797c3cff6f0b83e4
-      internalID: 478390847
+      spriteID: f65a500b73170a643a5e5b111c89e3f8
+      internalID: 664412218
       vertices: []
       indices: 
       edges: []
@@ -146,7 +120,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 58952b2474e9ffb4687777390528e26c
     internalID: 0
     vertices: []
     indices: 
@@ -154,7 +128,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Untitled_Artwork-2 9_0: 478390847
+      kafes_acik_0: 664412218
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
