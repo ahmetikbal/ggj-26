@@ -173,6 +173,9 @@ public class CharacterDialoguePanel : MonoBehaviour
     /// </summary>
     public void HideDialogue()
     {
+        GetComponent<SpriteRenderer>().enabled = true;
+        transform.GetChild(0).gameObject.SetActive(true); //canvas
+
         if (dialoguePanel != null)
             dialoguePanel.SetActive(false);
         

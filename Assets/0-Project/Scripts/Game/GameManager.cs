@@ -8,6 +8,9 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
+    [HideInInspector] public Vector3 initialCameraPosition;
+    [HideInInspector] public float initialOrtographicSize;
+
     private void Awake()
     {
         if (Instance == null)
@@ -18,6 +21,9 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        initialCameraPosition = Camera.main.transform.position;
+        initialOrtographicSize = Camera.main.orthographicSize;
     }
 
     public enum GameState
@@ -50,7 +56,7 @@ public class GameManager : MonoBehaviour
         {
             case GameState.Free:
                 inspectorAnimator.speed = 1;
-                dialogueTriggered = false;
+                dialogueTriggered = false; 
                 break;
                 
             case GameState.MoveToTarget:
@@ -94,5 +100,11 @@ public class GameManager : MonoBehaviour
         {
             gameState = GameState.Free;
         }
+    }
+
+    public void ResetCameraToInitialPosition()
+    {
+        Camera.main.transform.DOMove(initialCameraPosition, 1f).SetEase(Ease.Linear);
+        DOVirtual.Float(Camera.main.orthographicSize, initialOrtographicSize, 1f, (value) => Camera.main.orthographicSize = value).SetEase(Ease.InOutQuad);
     }
 }

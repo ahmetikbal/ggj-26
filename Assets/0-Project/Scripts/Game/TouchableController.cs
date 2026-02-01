@@ -27,7 +27,7 @@ public class TouchableController : MonoBehaviour
     {
         touchables = new List<TouchableObjects>();
         touchables.AddRange(FindObjectsOfType<TouchableObjects>());
-        touchables.ForEach(t => t.GetComponent<Renderer>().material.DisableKeyword("OUTBASE_ON"));
+        touchables.ForEach(t => t.transform.GetChild(0).GetComponent<Renderer>().material.DisableKeyword("OUTBASE_ON"));
  
     }
 
@@ -44,7 +44,7 @@ public class TouchableController : MonoBehaviour
             // Sadece müsait karakterleri highlight yap
             if (touchable != null && touchable.CanInteract())
             {
-                hit.collider.GetComponent<Renderer>().material.EnableKeyword("OUTBASE_ON"); 
+                hit.collider.transform.GetChild(0).GetComponent<Renderer>().material.EnableKeyword("OUTBASE_ON"); 
 
                 if (Input.GetMouseButtonDown(0) && GameManager.Instance.gameState == GameManager.GameState.Free)
                 {
@@ -63,12 +63,12 @@ public class TouchableController : MonoBehaviour
             else
             {
                 // Müsait olmayan karakter - highlight yapma
-                hit.collider.GetComponent<Renderer>().material.DisableKeyword("OUTBASE_ON");
+                hit.collider.transform.GetChild(0).GetComponent<Renderer>().material.DisableKeyword("OUTBASE_ON");
             }
         }
         else
         {
-            touchables.ForEach(t => t.GetComponent<Renderer>().material.DisableKeyword("OUTBASE_ON"));
+            touchables.ForEach(t => t.transform.GetChild(0).GetComponent<Renderer>().material.DisableKeyword("OUTBASE_ON"));
         }
     }
     

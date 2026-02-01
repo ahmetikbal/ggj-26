@@ -220,6 +220,8 @@ public class DialogueManager : MonoBehaviour
         OnDialogueEnded?.Invoke();
         
         Debug.Log("[DialogueManager] Dialogue ended");
+
+        GameManager.Instance.ResetCameraToInitialPosition();
     }
     
     #endregion
