@@ -114,4 +114,20 @@ public class GameManager : MonoBehaviour
         Camera.main.transform.DOMove(initialCameraPosition, 1f).SetEase(Ease.Linear);
         DOVirtual.Float(Camera.main.orthographicSize, initialOrtographicSize, 1f, (value) => Camera.main.orthographicSize = value).SetEase(Ease.InOutQuad);
     }
+
+
+    public GameObject questionPanel, wrongAnswerPanel, trueAnswerPanel;
+    public void OnClick_WrongAnswer()
+    {
+        questionPanel.SetActive(false);
+        wrongAnswerPanel.SetActive(true);
+        trueAnswerPanel.SetActive(false);
+    }
+
+    public void OnClick_TrueAnswer()
+    {
+        questionPanel.SetActive(false);
+        wrongAnswerPanel.SetActive(false);
+        trueAnswerPanel.SetActive(true);
+    }
 }
