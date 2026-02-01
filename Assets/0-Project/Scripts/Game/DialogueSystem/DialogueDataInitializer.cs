@@ -78,6 +78,7 @@ public class DialogueDataInitializer : MonoBehaviour
         {
             nodeId = "ch1_entry",
             editorNote = "Aşçı ile ilk konuşma",
+            blockedByFlags = new string[] { "fruitninja_completed" }, // Bir kez oynadıktan sonra tekrar oynamasın
             lines = new DialogueLine[]
             {
                 new DialogueLine { speaker = CharacterType.Dedektif, text = "Aşçı hanım iyi günler, burda kayıp papağan davası üzerine soruşturma yapmak için bulunuyorum. Bilgileriniz bizim için kıymetli." },
@@ -96,12 +97,13 @@ public class DialogueDataInitializer : MonoBehaviour
             minimumChapter = 1
         });
         
-        // Minigame sonrası
+        // Minigame sonrası (ForcePlayNode ile çağrılır, bir daha entry point olarak seçilmemeli)
         asciData.dialogueNodes.Add(new DialogueNode
         {
             nodeId = "ch1_post_minigame",
             editorNote = "Fruit Ninja sonrası",
             requiredFlags = new string[] { "fruitninja_completed" },
+            blockedByFlags = new string[] { "tableclean_completed" }, // Tableclean sonrası tekrar oynamasın
             lines = new DialogueLine[]
             {
                 new DialogueLine { speaker = CharacterType.AsciFadime, text = "İşte böyle. Ben vallahi kimseyi görmedim. Bukadar kişiye yemek yetiştiriyorum." },
@@ -155,6 +157,7 @@ public class DialogueDataInitializer : MonoBehaviour
         {
             nodeId = "ch1_entry",
             editorNote = "Garson ile ilk konuşma",
+            blockedByFlags = new string[] { "talked_all_suspects" }, // Tüm şüphelilerle konuştuktan sonra ch1_second oynansın
             lines = new DialogueLine[]
             {
                 new DialogueLine { speaker = CharacterType.Garson, text = "Hoşgeldiniz hoşgeldiniz" },
@@ -176,6 +179,7 @@ public class DialogueDataInitializer : MonoBehaviour
             nodeId = "ch1_second",
             editorNote = "Garson - masa toplama minigame öncesi",
             requiredFlags = new string[] { "talked_all_suspects" },
+            blockedByFlags = new string[] { "tableclean_completed" }, // Minigame sonrası tekrar oynamasın
             lines = new DialogueLine[]
             {
                 new DialogueLine { speaker = CharacterType.Dedektif, text = "Kimse doğru düzgün anlatmıyor. Bence sen daha fazla şey hatırlayabilirsin." },
@@ -209,33 +213,36 @@ public class DialogueDataInitializer : MonoBehaviour
             minimumChapter = 1
         });
         
-        // Chapter 2 - Opsiyonel
+        // Chapter 2 - Finale trigger
         garsonData.dialogueNodes.Add(new DialogueNode
         {
             nodeId = "ch2_entry",
-            editorNote = "Chapter 2 - Opsiyonel yardım",
+            editorNote = "Chapter 2 - Finale trigger - Garsonla konuşunca final karar",
             lines = new DialogueLine[]
             {
-                new DialogueLine { speaker = CharacterType.Garson, text = "Yardım edersen sana bi iki bilgi daha vereyim" }
+                new DialogueLine { speaker = CharacterType.Garson, text = "Efendim, bence yeterince bilgi topladınız..." },
+                new DialogueLine { speaker = CharacterType.Garson, text = "Suçluyu bulabildiniz mi?" },
+                new DialogueLine { speaker = CharacterType.Dedektif, text = "Sanırım kararımı verebilirim." }
             },
             choices = new DialogueChoice[]
             {
                 new DialogueChoice
                 {
-                    choiceText = "a) Elbette",
+                    choiceText = "a) Suçluyu açıkla",
                     responseLines = new DialogueLine[]
                     {
-                        new DialogueLine { speaker = CharacterType.Garson, text = "Kuşun gitmesi iyi oldu açıkçası. Eee ne konuşsan yanında hemen sahibine ötüyor!" },
-                        new DialogueLine { speaker = CharacterType.Garson, text = "Maaş az diyorum ertesi gün maaş daha da azalıyor!! Hem bakamıyordu ev sahibi. Yıllardır uçmadı o kuş." },
-                        new DialogueLine { speaker = CharacterType.Dedektif, text = "Bildiğin herşeyi anlat garson" },
-                        new DialogueLine { speaker = CharacterType.Garson, text = "Hiçbişey! Hem paranız var mı bayım dedikodu istiyorsunuz!" }
+                        new DialogueLine { speaker = CharacterType.Dedektif, text = "Herkesi toplasın, suçluyu açıklayacağım." },
+                        new DialogueLine { speaker = CharacterType.Garson, text = "H-hemen efendim!" }
                     },
-                    flagToSet = "garson_extra_info"
+                    actionOnSelect = DialogueAction.ShowFinalDecision
                 },
                 new DialogueChoice
                 {
-                    choiceText = "b) Gerek yok teşekkürler",
-                    responseLines = new DialogueLine[0]
+                    choiceText = "b) Biraz daha soru sorayım",
+                    responseLines = new DialogueLine[]
+                    {
+                        new DialogueLine { speaker = CharacterType.Garson, text = "Tabi efendim, acele etmeyin." }
+                    }
                 }
             },
             minimumChapter = 2

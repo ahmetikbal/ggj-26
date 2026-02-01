@@ -132,17 +132,10 @@ public class FruitNinjaUI : MonoBehaviour
     
     public void ExitGame()
     {
-        // Close mini-game and return to main game
-        // This will be implemented based on your scene structure
-        Debug.Log("Exit mini-game");
+        // FruitNinja tamamlandı, DialogueActionHandler sahne geçişlerini halleder
+        Debug.Log("[FruitNinjaUI] Exit mini-game - calling OnFruitNinjaComplete");
         
-        // Example: Load previous scene or destroy mini-game canvas
-        // SceneManager.LoadScene("MainGame");
-        // Or: Destroy(gameObject);
-
-        DialogueActionHandler.Instance.OnMinigameComplete();
-        GameManager.Instance.fruitNinjaGameObject.SetActive(false);
-        GameManager.Instance.asciSceneGameObject.SetActive(false);
-        GameManager.Instance.mainSceneGameObject.SetActive(true);
+        // Tek çağrı yeterli - tüm sahne geçişleri ve diyalog başlatma burada hallediliyor
+        DialogueActionHandler.Instance.OnFruitNinjaComplete();
     }
 }

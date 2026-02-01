@@ -94,6 +94,16 @@ public class StoryStateManager : MonoBehaviour
     
     #region Character Tracking
     
+    // Chapter 1'de konuşulması gereken şüpheliler
+    private static readonly CharacterType[] Chapter1Suspects = new CharacterType[]
+    {
+        CharacterType.BesteciRedif,
+        CharacterType.SimyaciSimurg,
+        CharacterType.AycaHanim,
+        CharacterType.TuccarAtlas,
+        CharacterType.BeatriceHanim
+    };
+    
     /// <summary>
     /// Karakterle konuşulduğunu işaretle
     /// </summary>
@@ -104,7 +114,35 @@ public class StoryStateManager : MonoBehaviour
             // Otomatik flag oluştur
             SetFlag($"talked_{character}");
             Debug.Log($"[StoryState] Talked to: {character}");
+            
+            // Chapter 1'de tüm şüphelilerle konuşuldu mu kontrol et
+            CheckAllSuspectsTalked();
         }
+    }
+    
+    /// <summary>
+    /// Tüm şüphelilerle konuşulup konuşulmadığını kontrol eder
+    /// </summary>
+    private void CheckAllSuspectsTalked()
+    {
+        // Chapter 1 - tüm şüpheliler kontrolü
+        if (currentChapter == 1 && !HasFlag("talked_all_suspects"))
+        {
+            foreach (var suspect in Chapter1Suspects)
+            {
+                if (!talkedCharacters.Contains(suspect))
+                {
+                    return; // Henüz hepsiyle konuşulmadı
+                }
+            }
+            
+            // Tüm şüphelilerle konuşuldu!
+            SetFlag("talked_all_suspects");
+            Debug.Log("[StoryState] All suspects have been talked to!");
+        }
+        
+        // Chapter 2 - finale geçiş için tracked
+        // Oyuncu istediği zaman finale geçebilir (dialog veya UI üzerinden)
     }
     
     /// <summary>
@@ -113,6 +151,28 @@ public class StoryStateManager : MonoBehaviour
     public bool HasTalkedTo(CharacterType character)
     {
         return talkedCharacters.Contains(character);
+    }
+    
+    /// <summary>
+    /// Kaç şüpheliyle konuşulduğunu döndürür
+    /// </summary>
+    public int GetTalkedSuspectsCount()
+    {
+        int count = 0;
+        foreach (var suspect in Chapter1Suspects)
+        {
+            if (talkedCharacters.Contains(suspect))
+                count++;
+        }
+        return count;
+    }
+    
+    /// <summary>
+    /// Toplam şüpheli sayısını döndürür
+    /// </summary>
+    public int GetTotalSuspectsCount()
+    {
+        return Chapter1Suspects.Length;
     }
     
     #endregion

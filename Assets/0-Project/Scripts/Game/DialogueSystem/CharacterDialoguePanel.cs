@@ -15,7 +15,7 @@ public class CharacterDialoguePanel : MonoBehaviour
     [SerializeField] private string characterDisplayName;
     
     [Header("UI References - Main")]
-    [SerializeField] private GameObject dialoguePanel;
+    [SerializeField] public GameObject dialoguePanel;
     [SerializeField] private TMP_Text speakerNameText;
     [SerializeField] private TMP_Text dialogueText;
     [SerializeField] private Button continueButton;
@@ -72,6 +72,13 @@ public class CharacterDialoguePanel : MonoBehaviour
         
         if (choicesPanel != null)
             choicesPanel.SetActive(false);
+        
+        // Text'leri sıfırla - eski diyalog kalmasın
+        if (dialogueText != null)
+            dialogueText.text = "";
+        
+        if (speakerNameText != null)
+            speakerNameText.text = "";
         
         OnDialogueStarted?.Invoke();
         

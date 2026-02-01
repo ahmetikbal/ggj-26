@@ -37,7 +37,8 @@ MonoBehaviour:
       nextNodeId: 
       onCompleteAction: 0
       requiredFlags: []
-      blockedByFlags: []
+      blockedByFlags:
+      - fruitninja_completed
       minimumChapter: 1
     - nodeId: ch1_post_minigame
       editorNote: "Fruit Ninja sonras\u0131"
@@ -58,7 +59,8 @@ MonoBehaviour:
       onCompleteAction: 3
       requiredFlags:
       - fruitninja_completed
-      blockedByFlags: []
+      blockedByFlags:
+      - tableclean_completed
       minimumChapter: 1
     - nodeId: ch1_second
       editorNote: "Chapter 1 sonu - A\u015F\xE7\u0131ya tekrar d\xF6n\xFC\u015F"
@@ -130,7 +132,8 @@ MonoBehaviour:
       nextNodeId: 
       onCompleteAction: 0
       requiredFlags: []
-      blockedByFlags: []
+      blockedByFlags:
+      - talked_all_suspects
       minimumChapter: 1
     - nodeId: ch1_second
       editorNote: "Garson - masa toplama minigame \xF6ncesi"
@@ -153,7 +156,8 @@ MonoBehaviour:
       onCompleteAction: 0
       requiredFlags:
       - talked_all_suspects
-      blockedByFlags: []
+      blockedByFlags:
+      - tableclean_completed
       minimumChapter: 1
     - nodeId: ch1_post_tableclean
       editorNote: "Masa toplama sonras\u0131"
@@ -177,35 +181,34 @@ MonoBehaviour:
       blockedByFlags: []
       minimumChapter: 1
     - nodeId: ch2_entry
-      editorNote: "Chapter 2 - Opsiyonel yard\u0131m"
+      editorNote: "Chapter 2 - Finale trigger - Garsonla konu\u015Funca final karar"
       lines:
       - speaker: 2
-        text: "Yard\u0131m edersen sana bi iki bilgi daha vereyim"
+        text: "Efendim, bence yeterince bilgi toplad\u0131n\u0131z..."
+        typingSpeed: 0.03
+      - speaker: 2
+        text: "Su\xE7luyu bulabildiniz mi?"
+        typingSpeed: 0.03
+      - speaker: 0
+        text: "San\u0131r\u0131m karar\u0131m\u0131 verebilirim."
         typingSpeed: 0.03
       choices:
-      - choiceText: a) Elbette
+      - choiceText: "a) Su\xE7luyu a\xE7\u0131kla"
         responseLines:
-        - speaker: 2
-          text: "Ku\u015Fun gitmesi iyi oldu a\xE7\u0131k\xE7as\u0131. Eee ne konu\u015Fsan
-            yan\u0131nda hemen sahibine \xF6t\xFCyor!"
-          typingSpeed: 0.03
-        - speaker: 2
-          text: "Maa\u015F az diyorum ertesi g\xFCn maa\u015F daha da azal\u0131yor!!
-            Hem bakam\u0131yordu ev sahibi. Y\u0131llard\u0131r u\xE7mad\u0131 o
-            ku\u015F."
-          typingSpeed: 0.03
         - speaker: 0
-          text: "Bildi\u011Fin her\u015Feyi anlat garson"
+          text: "Herkesi toplas\u0131n, su\xE7luyu a\xE7\u0131klayaca\u011F\u0131m."
           typingSpeed: 0.03
         - speaker: 2
-          text: "Hi\xE7bi\u015Fey! Hem paran\u0131z var m\u0131 bay\u0131m dedikodu
-            istiyorsunuz!"
+          text: H-hemen efendim!
           typingSpeed: 0.03
         jumpToNodeId: 
-        flagToSet: garson_extra_info
-        actionOnSelect: 0
-      - choiceText: "b) Gerek yok te\u015Fekk\xFCrler"
-        responseLines: []
+        flagToSet: 
+        actionOnSelect: 13
+      - choiceText: "b) Biraz daha soru soray\u0131m"
+        responseLines:
+        - speaker: 2
+          text: Tabi efendim, acele etmeyin.
+          typingSpeed: 0.03
         jumpToNodeId: 
         flagToSet: 
         actionOnSelect: 0

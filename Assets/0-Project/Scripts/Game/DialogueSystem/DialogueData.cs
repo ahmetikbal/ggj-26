@@ -103,16 +103,107 @@ public class CharacterDialogueData
     }
     
     /// <summary>
-    /// Bu karakterin chapter için başlangıç node'unu bulur
+    /// Bu karakterin chapter için en uygun başlangıç node'unu bulur
+    /// Öncelik: tableclean_completed > fruitninja_completed > talked_all_suspects > entry
     /// </summary>
     public DialogueNode GetEntryNode(int chapter)
     {
-        // Önce chapter'a uygun entry node ara
-        var entryId = $"ch{chapter}_entry";
-        var node = GetNode(entryId);
-        if (node != null) return node;
+        var storyState = StoryStateManager.Instance;
+        if (storyState == null)
+        {
+            Debug.LogWarning("[DialogueData] StoryStateManager not found, returning first available node");
+            return dialogueNodes.Find(n => n.minimumChapter <= chapter);
+        }
         
-        // Yoksa ilk uygun node'u döndür
-        return dialogueNodes.Find(n => n.minimumChapter <= chapter);
+        // Öncelik sırasına göre entry point'leri kontrol et
+        // 1. En yüksek öncelik: ch1_second (tableclean_completed gerektirir) 
+        // 2. Orta öncelik: ch1_post_minigame (fruitninja_completed gerektirir)
+        // 3. Düşük öncelik: ch1_entry veya ch2_entry (chapter bazlı)
+        
+        DialogueNode bestMatch = null;
+        int bestPriority = -1;
+        
+        foreach (var node in dialogueNodes)
+        {
+            // Chapter kontrolü
+            if (node.minimumChapter > chapter) continue;
+            
+            // Koşulları karşılıyor mu?
+            if (!storyState.CanShowNode(node)) continue;
+            
+            // Entry point olabilecek node'ları filtrele
+            // Sadece belirli ID pattern'leri entry point olabilir
+            if (!IsEntryPointNode(node)) continue;
+            
+            // Priority hesapla
+            int priority = CalculateEntryPriority(node, chapter);
+            
+            if (priority > bestPriority)
+            {
+                bestPriority = priority;
+                bestMatch = node;
+            }
+        }
+        
+        if (bestMatch == null)
+        {
+            Debug.LogWarning($"[DialogueData] No valid entry node found for {characterType} in chapter {chapter}");
+        }
+        else
+        {
+            Debug.Log($"[DialogueData] Selected entry node '{bestMatch.nodeId}' for {characterType} (priority: {bestPriority})");
+        }
+        
+        return bestMatch;
+    }
+    
+    /// <summary>
+    /// Node'un entry point olup olmadığını kontrol eder
+    /// Entry point: Karakter ile serbest etkileşimde başlayabilecek node
+    /// </summary>
+    private bool IsEntryPointNode(DialogueNode node)
+    {
+        if (string.IsNullOrEmpty(node.nodeId)) return false;
+        
+        // Entry point olabilecek node ID pattern'leri
+        return node.nodeId.Contains("entry") ||      // ch1_entry, ch2_entry
+               node.nodeId.Contains("second") ||     // ch1_second (talked_all_suspects)
+               node.nodeId.Contains("post_minigame") || // ch1_post_minigame (force ile çağrılır ama...)
+               node.nodeId.Contains("post_tableclean"); // ch1_post_tableclean
+    }
+    
+    /// <summary>
+    /// Entry node için priority hesaplar
+    /// Yüksek = daha öncelikli
+    /// </summary>
+    private int CalculateEntryPriority(DialogueNode node, int chapter)
+    {
+        int priority = 0;
+        
+        // Chapter bazlı temel priority
+        priority += node.minimumChapter * 1000;
+        
+        // Required flag sayısı - daha fazla flag = daha spesifik
+        if (node.requiredFlags != null)
+        {
+            priority += node.requiredFlags.Length * 100;
+            
+            // Özel flag'ler için ekstra priority
+            foreach (var flag in node.requiredFlags)
+            {
+                if (flag == "tableclean_completed")
+                    priority += 500; // En yüksek öncelik
+                else if (flag == "talked_all_suspects")
+                    priority += 200; // İkinci öncelik
+                else if (flag == "fruitninja_completed")
+                    priority += 100; // Üçüncü öncelik
+            }
+        }
+        
+        // Entry node'lar temel priority'ye sahip (en düşük)
+        if (node.nodeId.Contains("entry"))
+            priority -= 50;
+        
+        return priority;
     }
 }

@@ -27,6 +27,7 @@ public class DialogueManager : MonoBehaviour
     private int currentLineIndex;
     private bool isDialogueActive;
     private bool isTyping;
+    private Coroutine typingCoroutine; // Typing coroutine referansı
     
     // Callback for final decision
     private Action<string> finalDecisionCallback;
@@ -163,14 +164,23 @@ public class DialogueManager : MonoBehaviour
             StoryStateManager.Instance.SetFlag(choice.flagToSet);
         }
         
+        // Seçenekleri gizle
+        currentPanel?.HideChoices();
+        
+        // Aksiyonu kontrol et - Eğer diyaloğu bitiren bir aksiyon ise
+        bool willEndDialogue = WillActionEndDialogue(choice.actionOnSelect);
+        
         // Seçenek aksiyonunu çalıştır
         if (choice.actionOnSelect != DialogueAction.None)
         {
             ExecuteAction(choice.actionOnSelect);
         }
         
-        // Seçenekleri gizle
-        currentPanel?.HideChoices();
+        // Aksiyon diyaloğu bitirdiyse, ProcessAfterChoice çağırma
+        if (willEndDialogue)
+        {
+            return;
+        }
         
         // Cevap satırları var mı?
         if (choice.responseLines != null && choice.responseLines.Length > 0)
@@ -183,6 +193,15 @@ public class DialogueManager : MonoBehaviour
             // Direkt jump veya next'e git
             ProcessAfterChoice(choice);
         }
+    }
+    
+    /// <summary>
+    /// Aksiyonun diyaloğu bitirip bitirmeyeceğini kontrol eder
+    /// </summary>
+    private bool WillActionEndDialogue(DialogueAction action)
+    {
+        return action == DialogueAction.StartMinigame_FruitNinja ||
+               action == DialogueAction.StartMinigame_TableClean;
     }
     
     /// <summary>
@@ -276,6 +295,14 @@ public class DialogueManager : MonoBehaviour
         
         var line = currentNode.lines[currentLineIndex];
         
+        // Önceki typing'i durdur
+        if (typingCoroutine != null)
+        {
+            StopCoroutine(typingCoroutine);
+            typingCoroutine = null;
+        }
+        isTyping = false;
+        
         // Panel'e gönder
         if (currentPanel != null)
         {
@@ -283,7 +310,7 @@ public class DialogueManager : MonoBehaviour
         }
         
         isTyping = true;
-        StartCoroutine(TypeTextCoroutine(line.text, line.typingSpeed));
+        typingCoroutine = StartCoroutine(TypeTextCoroutine(line.text, line.typingSpeed));
     }
     
     private IEnumerator TypeTextCoroutine(string text, float speed)
